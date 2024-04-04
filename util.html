@@ -8,6 +8,14 @@
 
 
 <body>
+	<div class="blogger section">
+		<h2>Blogger Styling</h2>
+		<div class="content-block">
+            <textarea id="blogger-article-html" placeholder="Paste Blogger article html here." rows="11" cols="100"></textarea>
+			<p><button id="blogger-styling-button">update</button></p>
+		</div>
+	</div>
+
 	<div class="base64 section">
 		<h2>Base64 En-Dec</h2>
 		<div class="content-block">
@@ -130,7 +138,7 @@
 			digit <input type="text" size="2" value="3" name="series_digit" id="series_digit" onkeyup="series();" disabled="disabled" />
 
 			<br />
-			<input type="checkbox" name="series_auto" id="series_auto" onclick="series();" checked="checked" /><label for="series_auto">automatic conjecture</label>
+			<input type="checkbox" name="series_auto" id="series_auto" onclick="series();" checked="checked" /><label for="series_auto">auto detection</label>
 			<input type="checkbox" name="series_hex" id="series_hex" style="margin-left: 1em;" onclick="series();" /><label for="series_hex">HEX mode</label>
 
 			<br />
@@ -267,8 +275,8 @@
 	</div>
 
 
-	<p style="margin-top: 2em;">jsUtils, ver. 7.0.0</p>
 	<script src="./lib/jastyle.js"></script>
+	<script src="./lib/jquery-3.7.1.min.js"></script>
 	<script src="./main.js"></script>
 	<script src="./refactored.js"></script>
 </body>
