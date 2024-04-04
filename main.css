@@ -9,11 +9,11 @@ body{
 
 @font-face {
 	font-family: 'BA-90';
-	src: url('./BA90.ttf') format('truetype');
+	src: url('./lib/BA90.ttf') format('truetype');
 }
 @font-face {
 	font-family: 'FlatUI';
-	src: url('./FlatUI.ttf') format('truetype');
+	src: url('./lib/FlatUI.ttf') format('truetype');
 }
 
 h2{
