@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jsUtils</title>
+	<link href="./main.css" rel="stylesheet" />
+</head>
+
+
+<body>
+	<div class="base64 section">
+		<h2>Base64 En-Dec</h2>
+		<div class="content-block">
+            <p>マルチバイト文字はエンコード時にUTF-8バイト列として解釈される</p>
+			<textarea id="base64-encoded" placeholder="Encoded String" rows="7" cols="100"></textarea>
+            <textarea id="base64-plain" placeholder="Plain String" rows="7" cols="100"></textarea>
+		</div>
+	</div>
+
+	<div class="f5attack-result section hidden">
+		<h2>Rapid Reloader Result</h2>
+		<div class="content-block">
+			<iframe id="target-window" name="target-window" src="" width="98%" height="300px" style="background:#ffffff; display:none;">
+				Iframe support required.
+			</iframe>
+		</div>
+	</div>
+
+
+	<div class="f5attack section">
+		<h2>Rapid Reloader</h2>
+		<div class="content-block">
+			<input type="text" class="f15-key-change" size="55" id="inputUrl" placeholder="Entry point URL" />
+			<ul class="f5attack-params">
+				<li>
+					<input type="checkbox" class="f15-click-change" id="f15-param1" />
+					<input type="text" class="f15-key-change" size="4" id="f15-name1" value="sid" /> =
+					<input type="text" class="f15-key-change" size="40" id="f15-value1" placeholder="d41d8cd98f00b204e9800998ecf8427e" />
+				</li>
+				<li>
+					<input type="checkbox" class="f15-click-change" id="f15-param2" />
+					<input type="text" class="f15-key-change" size="4" id="f15-name2" value="q" /> =
+					<input type="text" class="f15-key-change" size="40" id="f15-value2" placeholder="myQueue" />
+				</li>
+				<li>
+					<input type="checkbox" class="f15-click-change" id="f15-param3" />
+					<input type="text" class="f15-key-change" size="4" id="f15-name3" value="page" /> =
+					<input type="text" class="f15-key-change" size="40" id="f15-value3" placeholder="5" />
+				</li>
+				<li>
+					<input type="checkbox" class="f15-click-change" id="f15-paramR" />
+					<input type="text" class="f15-key-change" size="4" id="f15-nameR" value="r" /> =
+					<input type="text" class="f15-key-change" size="42" id="f15-valueR"  placeholder="R value" style="font-style: italic;" />
+				</li>
+			</ul>
+
+			<textarea placeholder="Accessing URL" id="outputUrl" rows="5" cols="80" style="color: #a0a0a0; font-style:italic; max-width: 98%; font-size: 140%"></textarea>
+			<br />
+
+			Access time:
+			(ms) <input type="text" size="8" value="600" id="f15-interval-ms" style="margin-right: 1em;" />
+			(min) <input type="text" size="8" value="0.01" id="f15-interval-min" /><br />
+			State: <span name="status" id="status">READY...</span><br />
+
+			<br />
+			<input type="button" id="f15-engage" value="Engage" />
+			<input type="button" id="f15-disengage" value="Terminate"/ >
+		</div>
+	</div>
+
+
+	<div class="easytimer section">
+		<h2>Easytimer</h2>
+		<div class="content-block">
+			<input type="text" class="et-input" id="et-combined" placeholder="h:m:s / h.m.s" />
+			<span class="et-result" id="et-result">Timed out.</span>
+			<br />
+			<label><input type="checkbox" class="et-option" id="et-alert" checked="checked" />Alert when timeout.</label>
+			<br /><br />
+			<input type="button" class="et-control" id="et-toggle-button" value="Start" />
+		</div>
+	</div>
+
+
+	<div class="jastyle section">
+		<h2>Jastyle</h2>
+		<div class="content-block">
+			<textarea rows="15" cols="105" name="jastyle-text" id="jastyle-text" ></textarea>
+			<br />
+			<input onclick="jastyle('jastyle-text');" type="button" value="Performe autoformat"/ >
+		</div>
+	</div>
+
+
+	<div class="transposer section">
+		<h2>Transposer</h2>
+		<div class="content-block">
+			<textarea rows="10" cols="100" name="codes1" id="codes1" placeholder="Paste chord chart here."></textarea>
+			<textarea rows="10" cols="100" name="codes2" id="codes2"  placeholder="Transposed chart appears here."></textarea>
+
+			<p>
+				<span style="padding-right: 1em;">Interval</span>
+				<button type="button" onclick="transDec();">◀</button>
+				<span id="tr_interval" class="tr_interval">0</span>
+				<button type="button" onclick="transInc();">▶</button>
+			</p>
+
+			<p class="transposer-modifcations">
+				Direction
+				<label class="xChar"><input type="radio" name="sharpflat" value="0" id="dflat" />e</label>
+				<label class="xChar"><input type="radio" name="sharpflat" value="1" id="flat" />c</label>
+				<label class="xChar sChar"><input type="radio" name="sharpflat" value="2" id="sharp" checked="checked" />b</label>
+				<label class="xChar lChar"><input type="radio" name="sharpflat" value="3" id="dsharp" />d</label>
+			</p>
+		</div>
+	</div>
+
+
+	<div class="sequentiol section">
+		<h2>Sequential Numbers Generator</h2>
+		<div class="content-block">
+			<input onclick="imgSrc();" id="series_wrap" class="series-wrap-button" type="button" value="wrap with: img src=&quot; &quot;"/ >
+			<input type="text" size="60" name="series_in" id="series_in" value="http://www.hoge.huga/001.jpg" style="max-width: 88%;" onclick="series();" onkeyup="series();" />
+			<br />
+			<br />
+			Replace <input type="text" size="3" value="!" name="series_replace" id="series_replace"  disabled="disabled" onkeyup="series();" />
+			with numbers from <input type="text" size="4" value="1" name="series_from" id="series_from" onkeyup="series();" />
+			to <input type="text" size="4" value="20" name="series_to" id="series_to" onkeyup="series();" />
+			with interval <input type="text" size="2" value="1" name="series_interval" id="series_interval" onkeyup="series();" />
+			digit <input type="text" size="2" value="3" name="series_digit" id="series_digit" onkeyup="series();" disabled="disabled" />
+
+			<br />
+			<input type="checkbox" name="series_auto" id="series_auto" onclick="series();" checked="checked" /><label for="series_auto">automatic conjecture</label>
+			<input type="checkbox" name="series_hex" id="series_hex" style="margin-left: 1em;" onclick="series();" /><label for="series_hex">HEX mode</label>
+
+			<br />
+			<br />
+			<textarea rows="11" cols="100" name="series_result" id="series_result"></textarea>
+		</div>
+	</div>
+
+
+	<div class="dispres section">
+		<h2>Resolution Calc</h2>
+		<div class="content-block">
+			<dl>
+				<dt>pixels: </dt>
+				<dd>
+					<input type="text" id="dispres-hpx" data-type="px" data-direction="h" placeholder="horizontal" size="10" />
+					<input type="text" id="dispres-vpx" data-type="px" data-direction="v" placeholder="vertical" size="10" />
+					<input type="text" id="dispres-dpx" data-type="px" data-direction="d" placeholder="diagonal" size="10" />
+					<input type="text" id="dispres-rpx" data-type="prop" placeholder="ratio" size="10" readonly="readonly" />
+				</dd>
+				<dt>inches: </dt>
+				<dd>
+					<input type="text" id="dispres-hin" data-type="in" data-direction="h" placeholder="horizontal" size="10" />
+					<input type="text" id="dispres-vin" data-type="in" data-direction="v" placeholder="vertical" size="10" />
+					<input type="text" id="dispres-din" data-type="in" data-direction="d" placeholder="diagonal" size="10" />
+					<input type="text" id="dispres-rin" data-type="prop" placeholder="ratio" size="10" readonly="readonly" />
+				</dd>
+				<dt>centimeters: </dt>
+				<dd>
+					<input type="text" id="dispres-hcm" data-type="cm" data-direction="h" placeholder="horizontal" size="10" />
+					<input type="text" id="dispres-vcm" data-type="cm" data-direction="v" placeholder="vertical" size="10" />
+					<input type="text" id="dispres-dcm" data-type="cm" data-direction="d" placeholder="diagonal" size="10" />
+					<input type="text" id="dispres-rcm" data-type="prop" placeholder="ratio" size="10" readonly="readonly" />
+				</dd>
+				<dt>pixels per inch: </dt>
+				<dd>
+					<input type="text" id="dispres-res" data-type="res" placeholder="resolution" size="10" readonly="readonly" />
+				</dd>
+			</dl>
+			<div id="dispres-preset">
+				<span class="res-preset" data-preset-name="uxga">UXGA</span>
+				<span class="res-preset" data-preset-name="wuxga">WUXGA</span>
+				<span class="res-preset" data-preset-name="fullHd">Full HD</span>
+				<span class="res-preset" data-preset-name="4k">4K</span>
+				<span class="res-preset" data-preset-name="surfacePro3">Surface Pro 3</span>
+				<span class="res-preset" data-preset-name="surfacePro6">Surface Pro 6</span>
+			</div>
+			<button id="dispres-discard">Discard</button>
+		</div>
+	</div>
+
+
+	<div class="numformat section">
+		<h2>Large Number Formatter</h2>
+		<div class="content-block">
+			format <input type="text" size="50" value="98765432109876543210" name="inNum" id="inNum" onkeyup="numFuri()" />
+			with accuracy <input type="text" size="4" value="4" name="roundExp" id="roundExp" onkeyup="numFuri()" /> digit
+			<br />
+
+			<dl>
+				<dt>Float</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcExp1" id="prcExp1" />
+					<input type="text" size="40" value="" name="prcExp2" id="prcExp2" />
+				</dd>
+				<dt>Apos</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcCamma1" id="prcCamma1" />
+					<input type="text" size="40" value="" name="prcCamma2" id="prcCamma2" />
+				</dd>
+				<dt>Short scale</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcSScale1" id="prcSScale1" />
+					<input type="text" size="40" value="" name="prcSScale2" id="prcSScale2" />
+				</dd>
+				<dt>Long scale</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcLScale1" id="prcLScale1" />
+					<input type="text" size="40" value="" name="prcLScale2" id="prcLScale2" />
+				</dd>
+				<dt>漢字表記</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcKan1" id="prcKan1" />
+					<input type="text" size="40" value="" name="prcKan2" id="prcKan2" />
+				</dd>
+				<dt>金融</dt>
+				<dd>
+					<input type="text" size="30" value="" name="prcFinance1" id="prcFinance1" />
+					<input type="text" size="40" value="" name="prcFinance2" id="prcFinance2" />
+				</dd>
+			</dl>
+
+		</div>
+	</div>
+
+
+	<div class="roman section">
+		<h2>Roman to Kana Translation</h2>
+		<div class="content-block">
+			<form id="rtoh">
+				<strong>入力：</strong> <input type="text" style="color: #2080c0;"
+				 name="input_string" value="" id="input_string" size="85"
+				 onclick="convert()" onkeyup="convert()" /><br />
+				<strong>出力：</strong> <input type="text" style="color: #a0a0a0;"
+				 name="output_string" value="" id="output_string" size="85"
+				 onclick="convert()" onkeyup="convert()" /><br />
+
+
+				<div style="margin-top: 2ex;">
+					<input type="checkbox" id="oldtype" name="oldtype" onclick="convert()" onkeypress="convert()" checked />
+					<label for="oldtype">ゐゑ</label><br />
+
+					<strong>確定済み英数：</strong> <input type="text" style="color: #000000;"
+					 name="converted" value="" id="converted" size="3"
+					 onclick="convert()" onkeyup="convert()" /><br />
+
+					<p id="buttons"><input type="reset" value="破棄" id="reset" /></p>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<div class="suddendeath section">
+		<h2>Sudden Death</h2>
+		<div class="content-block">
+			<form id="suddendeath">
+				<input type="text" id="suddenDeathInput" value="突然の死" />
+				<input type="button" value="generate" onkeydown="suddenDeath()" onclick="suddenDeath()" />
+				<br /><br />
+				<textarea rows="10" cols="100" id="suddenDeathDisp"></textarea>
+			</form>
+		</div>
+	</div>
+
+
+	<p style="margin-top: 2em;">jsUtils, ver. 7.0.0</p>
+	<script src="./jastyle.js"></script>
+	<script src="./main.js"></script>
+	<script src="./refactored.js"></script>
+</body>
+</html>
