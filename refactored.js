@@ -123,7 +123,7 @@ const main = () => {
         },
 
         getSecondsByCombinedInput: (inputText) => {
-            const timeFragments = util.zen2han(inputText).split(/[:\.]/);
+            const timeFragments = util.zen2han(inputText).split(/[:.]/);
             const format = (fragment) => {
                 const parsed = parseInt(fragment, 10);
                 return isNaN(parsed) ? 0 : parsed;

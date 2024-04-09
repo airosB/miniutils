@@ -235,27 +235,25 @@
 	</div>
 
 
+
 	<div class="roman section">
 		<h2>Roman to Kana Translation</h2>
 		<div class="content-block">
-			<form id="rtoh">
+			<form>
 				<strong>入力：</strong> <input type="text" style="color: #2080c0;"
-				 name="input_string" value="" id="input_string" size="85"
-				 onclick="convert()" onkeyup="convert()" /><br />
+				  value="" id="roman-input" size="85" /><br />
 				<strong>出力：</strong> <input type="text" style="color: #a0a0a0;"
-				 name="output_string" value="" id="output_string" size="85"
-				 onclick="convert()" onkeyup="convert()" /><br />
+				  value="" id="roman-output" size="85"/><br />
 
 
 				<div style="margin-top: 2ex;">
-					<input type="checkbox" id="oldtype" name="oldtype" onclick="convert()" onkeypress="convert()" checked />
-					<label for="oldtype">ゐゑ</label><br />
+					<input type="checkbox" id="roman-old-spelling" checked />
+					<label for="roman-old-spelling">ゐゑ</label><br />
 
 					<strong>確定済み英数：</strong> <input type="text" style="color: #000000;"
-					 name="converted" value="" id="converted" size="3"
-					 onclick="convert()" onkeyup="convert()" /><br />
+					  value="" id="roman-confirmed-count" size="3" /><br />
 
-					<p id="buttons"><input type="reset" value="破棄" id="reset" /></p>
+					<input type="reset" value="破棄" id="roman-reset" />
 				</div>
 			</form>
 		</div>
@@ -279,5 +277,6 @@
 	<script src="./lib/jquery-3.7.1.min.js"></script>
 	<script src="./main.js"></script>
 	<script src="./refactored.js"></script>
+	<script src="RomanToKanaTranslator.js"></script>
 </body>
 </html>
