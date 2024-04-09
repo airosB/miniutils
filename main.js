@@ -35,7 +35,7 @@ window.resCalc = {
 	incm: [null, null],
 }
 
-//-----------------田代砲-----------------
+//-----------------reloader-----------------
 
 function f15Attack(){
 	window.timeToGo;
@@ -826,44 +826,4 @@ function transposeDrv(transEdit, interval, direction) {
 
 	return(transEdit);
 }
-
-
-
-//-----------------突然の死-----------------
-
-
-function suddenDeath() {
-	var str = gebi('suddenDeathInput').value;
-
-	var len = Math.floor(str.lengthByte() / 2);
-	var suddenDeathOut = "＿" +
-		("人".repeat(len + 2)) + "＿\n" +
-		"＞　" + str + "　＜\n" +
-		"￣^" + ("Y^".repeat(len)) + "￣";
-
-	gebi('suddenDeathDisp').value = suddenDeathOut;
-}
-
-String.prototype.lengthByte = function() {
-	var str = this;
-	var r = 0;
-	for (var i = 0; i < str.length; i++) {
-		var c = str.charCodeAt(i);
-		//1文字ずつ移動して文字列幅を計算する
-		// Shift_JIS: 0x0 ～ 0x80, 0xa0 , 0xa1 ～ 0xdf , 0xfd ～ 0xff
-		// Unicode : 0x0 ～ 0x80, 0xf8f0, 0xff61 ～ 0xff9f, 0xf8f1 ～ 0xf8f3
-		if ( (c >= 0x0 && c < 0x81) || (c == 0xf8f0) || (c >= 0xff61 && c < 0xffa0) || (c >= 0xf8f1 && c < 0xf8f4)) {
-			r += 1;
-		} else {
-			r += 2;
-		}
-	}
-	return r;
-}
-
-String.prototype.repeat = function(n) {
-	//同じ文字のリピートを作る
-	return new Array(n + 1).join(this);
-}
-
 

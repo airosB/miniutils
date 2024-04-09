@@ -263,12 +263,15 @@
 	<div class="suddendeath section">
 		<h2>Sudden Death</h2>
 		<div class="content-block">
-			<form id="suddendeath">
-				<input type="text" id="suddenDeathInput" value="突然の死" />
-				<input type="button" value="generate" onkeydown="suddenDeath()" onclick="suddenDeath()" />
-				<br /><br />
-				<textarea rows="10" cols="100" id="suddenDeathDisp"></textarea>
-			</form>
+			<form>
+                <p>
+                    <input type="text" id="sudden-death-input" value="突然の死"/>
+                    <button type="button" id="sudden-death-start">やる</button>
+                </p>
+                <p>
+                    <textarea rows="10" cols="100" id="sudden-death-result"></textarea>
+                </p>
+            </form>
 		</div>
 	</div>
 
@@ -277,6 +280,7 @@
 	<script src="./lib/jquery-3.7.1.min.js"></script>
 	<script src="./main.js"></script>
 	<script src="./refactored.js"></script>
+	<script src="EasyTimer.js"></script>
 	<script src="RomanToKanaTranslator.js"></script>
 </body>
 </html>
