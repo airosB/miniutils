@@ -53,13 +53,22 @@ const main = () => {
             $article.find('img').each((_, img) => {
                 const $img = $(img);
                 const src = $img.attr('src');
-                const dominantSize = $img.attr('width') === '640' ? 'width' : $img.attr('height') === '640' ? 'height' : null;
 
-                if (dominantSize) {
-                    $img.removeAttr(dominantSize === 'width' ? 'height' : 'width');
-                    $img.attr(dominantSize, imageSizeToEnlarge);
-                    const newSizeIndicator = dominantSize === 'width' ? '=w' : '=h';
-                    $img.attr('src', src.replace(/=w\d+$/, `${newSizeIndicator}${imageSizeToEnlarge}`));
+                // 初回実行時は640、再実行時は720で渡される
+                const dominantOrientation = ($img.attr('width') === '640' || $img.attr('width') === '720')
+                    ? 'width'
+                    : ($img.attr('height') === '640' || $img.attr('height') === '720')
+                        ? 'height'
+                        : null;
+
+                if (dominantOrientation !== null) {
+                    $img.removeAttr(dominantOrientation === 'width' ? 'height' : 'width');
+                    $img.attr(dominantOrientation, imageSizeToEnlarge);
+                    const newSizeIndicator = dominantOrientation === 'width' ? '=w' : '=h';
+                    const enlargedSrc = src.replace(/=w.+$/, `${newSizeIndicator}${imageSizeToEnlarge}`)
+                    console.log(enlargedSrc.substring(230))
+
+                    $img.attr('src', enlargedSrc);
                 }
             });
             return $article;

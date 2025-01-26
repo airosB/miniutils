@@ -727,3 +727,5 @@ function numFuri() {
 	prcFinance2.value = formatFinance(array, array.length).join('');
 }
 
+
+
