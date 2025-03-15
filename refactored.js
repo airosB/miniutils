@@ -91,6 +91,67 @@ const main = () => {
     bloggerStyling.bindEvents();
 
     /**
+     * Kemonoから画像DL用URLを抽出
+     */
+    const kemonoImageUrlExtractor = {
+        update: () => {
+            const $textarea = $('#kemono-article-html');
+            const originalArticle = $textarea.val();
+            // トップレベルに直接書かれたimgなどが不正なhtmlとして除去されるのを防ぐため、divに流し込む
+            let $html = $(`<div id="jquery-wrapper">${originalArticle}</div>`);
+
+            urls = kemonoImageUrlExtractor.extractUrls($html);
+            urls = kemonoImageUrlExtractor.setDownloadFileNames(urls);
+
+            $textarea.val(urls.join("\n"));
+        },
+
+        /**
+         * HTMLから画像URLの配列を抽出する
+         * @param $html
+         * @returns {String[]}
+         */
+        extractUrls: ($html) => {
+            const $links = $html.find('a.image-link');
+            let result = [];
+            $links.each((_, link) => {
+                result.push(link.getAttribute('href'));
+            })
+
+            return result;
+        },
+
+        /**
+         * 新しいファイル名を設定する
+         * @param urls String[]
+         * @returns {String[]}
+         */
+        setDownloadFileNames: (urls) => {
+            return urls.map((rawUrl, i) => {
+                const url = URL.parse(rawUrl);
+
+                // 元ファイル名の末尾から拡張子を取り出し
+                let extension = '';
+                if (url.search.endsWith('.jpeg') || url.search.endsWith('.jpg')) {
+                    extension = 'jpg'
+                } else {
+                    extension = url.search.replace(/.+\.([A-Za-z]+)$/, '$1');
+                }
+
+                // 連番化
+                const fileIndex = ('' + i).padStart(3, '0')
+                const filename = `${fileIndex}.${extension}`;
+                return url.origin + url.pathname + '?f=' + filename;
+            })
+        },
+
+        bindEvents: () => {
+            $('#kemono-styling-button').bind('click', kemonoImageUrlExtractor.update);
+        },
+    };
+    kemonoImageUrlExtractor.bindEvents();
+
+    /**
      * 突然の死
      */
     const suddenDeath = {
