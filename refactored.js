@@ -95,15 +95,18 @@ const main = () => {
      */
     const kemonoImageUrlExtractor = {
         update: () => {
-            const $textarea = $('#kemono-article-html');
-            const originalArticle = $textarea.val();
+            const $input = $('#kemono-article-html');
+            const $output = $('#kemono-extracted');
+            const originalArticle = $input.val();
+            const prefix = $('#kemono-prefix').val();
+
             // トップレベルに直接書かれたimgなどが不正なhtmlとして除去されるのを防ぐため、divに流し込む
             let $html = $(`<div id="jquery-wrapper">${originalArticle}</div>`);
 
             urls = kemonoImageUrlExtractor.extractUrls($html);
-            urls = kemonoImageUrlExtractor.setDownloadFileNames(urls);
+            urls = kemonoImageUrlExtractor.setDownloadFileNames(urls, prefix);
 
-            $textarea.val(urls.join("\n"));
+            $output.val(urls.join("\n"));
         },
 
         /**
@@ -124,9 +127,10 @@ const main = () => {
         /**
          * 新しいファイル名を設定する
          * @param urls String[]
+         * @param prefix String
          * @returns {String[]}
          */
-        setDownloadFileNames: (urls) => {
+        setDownloadFileNames: (urls, prefix) => {
             return urls.map((rawUrl, i) => {
                 const url = URL.parse(rawUrl);
 
@@ -140,7 +144,7 @@ const main = () => {
 
                 // 連番化
                 const fileIndex = ('' + i).padStart(3, '0')
-                const filename = `${fileIndex}.${extension}`;
+                const filename = `${prefix}${fileIndex}.${extension}`;
                 return url.origin + url.pathname + '?f=' + filename;
             })
         },

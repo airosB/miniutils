@@ -11,7 +11,7 @@
 	<div class="blogger section">
 		<h2>Blogger Styling</h2>
 		<div class="content-block">
-            <textarea id="blogger-article-html" placeholder="Paste Blogger article html here." rows="11" cols="100"></textarea>
+            <textarea id="blogger-article-html" placeholder="Paste Blogger article html here." rows="8" cols="80"></textarea>
 			<p><button id="blogger-styling-button">update</button></p>
 		</div>
 	</div>
@@ -19,8 +19,14 @@
 	<div class="kemono section">
 		<h2>Kemono Extractor</h2>
 		<div class="content-block">
-            <textarea id="kemono-article-html" placeholder="Paste Kemono html here." rows="11" cols="110"></textarea>
-			<p><button id="kemono-styling-button">update</button></p>
+			<div class="kemono-inout">
+				<textarea id="kemono-article-html" placeholder="Paste Kemono html here." rows="8" cols="66"></textarea>
+				<textarea id="kemono-extracted" placeholder="Result here." rows="8" cols="66"></textarea>
+			</div>
+			<p>
+				<input id="kemono-prefix" type="text" placeholder="prefix" size="5" />
+				<button id="kemono-styling-button">update</button>
+			</p>
 		</div>
 	</div>
 

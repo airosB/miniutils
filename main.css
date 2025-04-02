@@ -22,7 +22,7 @@ h2{
 	font-family: "FOT-ユールカ Std UB";
 }
 .section{
-	margin-bottom: 80px;
+	margin-bottom: 60px;
 }
 .content-block{
 	margin-top: 15px;
@@ -30,7 +30,6 @@ h2{
 .hidden{
 	display: none;
 }
-
 
 ul{
 	list-style-type: none;
@@ -235,4 +234,11 @@ ul.f5attack-params>li+li{
 .series-wrap-button{
 	width: 200px;
 }
+
+
+div.kemono-inout textarea {
+	display: inline-block;
+	margin-top: 0;
+}
+
 
