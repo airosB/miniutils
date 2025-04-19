@@ -37,7 +37,7 @@ window.resCalc = {
 
 //-----------------reloader-----------------
 
-function f15Attack(){
+function intervalReloader(){
 	window.timeToGo;
 	var targetUrl,doneCount,engageTimer,statusTimer,timeToNext;
 	var inputUrl = gebi('inputUrl');
@@ -165,7 +165,7 @@ function f15Attack(){
 	intervalMin.addEventListener('keyup', min2ms, false);
 	intervalMs.addEventListener('keyup', ms2min, false);
 }
-f15Attack();
+intervalReloader();
 
 
 
