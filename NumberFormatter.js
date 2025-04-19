@@ -55,6 +55,128 @@ const NumberFormatter = {
         const result = [];
         ar.forEach((num, i) => {
             result.unshift(num);
-            if (i % 3 === 2 && i < ar.length - 1) {
+            // 3桁ごと、かつ最後のブロックでない場合に区切り文字を追加
+            if ((i + 1) % 3 === 0 && i < ar.length - 1) {
                 result.unshift("' ");
             }
+        });
+
+        return result.join('');
+    },
+
+    /**
+     * 漢字形式（万、億、兆...）にフォーマット
+     */
+    formatJapanese: (array, digits) => {
+        const ar = [...array];
+        const suffixes = ['', '万', '億', '兆', '京', '垓', '秭', '穣', '溝', '澗', '正', '載', '極', '恒河沙', '阿僧祇', '那由他', '不可思議', '無量大数'];
+        ar.push(...Array(digits - ar.length).fill(0));
+        ar.reverse();
+
+        const result = [];
+        let block = [];
+        let suffixIndex = 0;
+
+        ar.forEach((num, i) => {
+            block.unshift(num);
+            if (block.length === 4 || i === ar.length - 1) {
+                const blockNum = parseInt(block.join(''), 10);
+                if (blockNum !== 0) {
+                    result.unshift(suffixes[suffixIndex]);
+                    result.unshift(blockNum);
+                }
+                block = [];
+                suffixIndex++;
+            }
+        });
+
+        return result.join('');
+    },
+
+    /**
+     * 金融形式（千、百万、十億...）にフォーマット
+     */
+    formatFinance: (array, digits) => {
+        const ar = [...array];
+        const suffixes = ['', '千', '百万', '十億', '兆', '千兆', '百京', '十垓', '秭', '千秭', '百穣', '十溝', '澗', '千澗', '百正', '十載', '極', '千極', '百恒河沙', '十阿僧祇', '那由他', '千那由他', '百不可思議', '十無量大数'];
+        ar.push(...Array(digits - ar.length).fill(0));
+        ar.reverse();
+
+        const result = [];
+        let block = [];
+        let suffixIndex = 0;
+
+        ar.forEach((num, i) => {
+            block.unshift(num);
+            if (block.length === 3 || i === ar.length - 1) {
+                const blockNum = parseInt(block.join(''), 10);
+                if (blockNum !== 0) {
+                    result.unshift(suffixes[suffixIndex] + ' ');
+                    result.unshift(blockNum);
+                }
+                block = [];
+                suffixIndex++;
+            }
+        });
+
+        return result.join('').trim(); // 末尾のスペースを削除
+    },
+
+    /**
+     * ショートスケール形式（thousand, million, billion...）にフォーマット
+     */
+    formatShortScale: (array, digits) => {
+        const ar = [...array];
+        const suffixes = ['', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion', 'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'];
+        ar.push(...Array(digits - ar.length).fill(0));
+        ar.reverse();
+
+        const result = [];
+        let block = [];
+        let suffixIndex = 0;
+
+        ar.forEach((num, i) => {
+            block.unshift(num);
+            if (block.length === 3 || i === ar.length - 1) {
+                const blockNum = parseInt(block.join(''), 10);
+                if (blockNum !== 0) {
+                    result.unshift(suffixes[suffixIndex] + ' ');
+                    result.unshift(blockNum);
+                }
+                block = [];
+                suffixIndex++;
+            }
+        });
+
+        return result.join('').trim(); // 末尾のスペースを削除
+    },
+
+    /**
+     * ロングスケール形式（million, billion, trillion...）にフォーマット
+     */
+    formatLongScale: (array, digits) => {
+        const ar = [...array];
+        const suffixes = ['', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion', 'undecillion', 'duodecillion', 'tredecillion', 'quattuordecillion', 'quindecillion', 'sexdecillion', 'septendecillion', 'octodecillion', 'novemdecillion', 'vigintillion'];
+        ar.push(...Array(digits - ar.length).fill(0));
+        ar.reverse();
+
+        const result = [];
+        let block = [];
+        let suffixIndex = 0;
+
+        ar.forEach((num, i) => {
+            block.unshift(num);
+            if (block.length === 6 || i === ar.length - 1) {
+                const blockNum = parseInt(block.join(''), 10);
+                if (blockNum !== 0) {
+                    result.unshift(suffixes[suffixIndex] + ' ');
+                    result.unshift(blockNum);
+                }
+                block = [];
+                suffixIndex++;
+            }
+        });
+
+        return result.join('').trim(); // 末尾のスペースを削除
+    }
+};
