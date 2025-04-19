@@ -8,44 +8,17 @@ const reloader = {
     timeToNext: 0,
 
     generateUrl: () => {
-        const params = {
-            1: {
-                enabled: _('#f15-param1').checked,
-                name: _('#f15-name1').value,
-                value: _('#f15-value1').value,
-            },
-            2: {
-                enabled: _('#f15-param2').checked,
-                name: _('#f15-name2').value,
-                value: _('#f15-value2').value,
-            },
-            3: {
-                enabled: _('#f15-param3').checked,
-                name: _('#f15-name3').value,
-                value: _('#f15-value3').value,
-            },
-            "R": {
-                enabled: _('#f15-paramR').checked,
-                name: _('#f15-nameR').value,
-                value: _('#f15-valueR').value,
-            }
-        };
-
-        const paramArray = [];
-        for (const [key, param] of Object.entries(params)) {
-            if (param.enabled) {
-                if (key === "R") {
-                    const rand = Math.random();
-                    _("#f15-valueR").value = rand;
-                    paramArray.push(`${param.name}=${rand}`);
-                } else {
-                    paramArray.push(`${param.name}=${param.value}`);
-                }
-            }
-        }
-
         const inputUrl = _('#inputUrl').value;
-        _('#outputUrl').value = paramArray.length ? `${inputUrl}?${paramArray.join('&')}` : inputUrl;
+        
+        // ランダムパラメータの処理
+        if (_('#f15-paramR').checked) {
+            const rand = Math.random();
+            _("#f15-valueR").value = rand;
+            const paramName = _('#f15-nameR').value;
+            _('#outputUrl').value = `${inputUrl}?${paramName}=${rand}`;
+        } else {
+            _('#outputUrl').value = inputUrl;
+        }
     },
 
     engage: () => {
@@ -106,14 +79,12 @@ const reloader = {
     },
 
     bindEvents: () => {
-        // キー入力とクリックでURL生成
-        document.querySelectorAll('.f15-key-change').forEach(el => {
-            el.addEventListener('keyup', reloader.generateUrl);
-        });
+        // 基本URL入力時のURL生成
+        _('#inputUrl').addEventListener('keyup', reloader.generateUrl);
         
-        document.querySelectorAll('.f15-click-change').forEach(el => {
-            el.addEventListener('click', reloader.generateUrl);
-        });
+        // ランダムパラメータの設定変更時のURL生成
+        _('#f15-paramR').addEventListener('change', reloader.generateUrl);
+        _('#f15-nameR').addEventListener('keyup', reloader.generateUrl);
 
         // リロード開始・停止
         _('#f15-engage').addEventListener('click', reloader.engage);
