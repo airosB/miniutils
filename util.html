@@ -193,40 +193,40 @@
 	<div class="numformat section">
 		<h2>Large Number Formatter</h2>
 		<div class="content-block">
-			format <input type="text" size="50" value="98765432109876543210" name="inNum" id="inNum" onkeyup="numFuri()" />
-			with accuracy <input type="text" size="4" value="4" name="roundExp" id="roundExp" onkeyup="numFuri()" /> digit
+			format <input type="text" size="50" value="98765432109876543210" id="nf-input-number" onkeyup="numFuri()" />
+			with accuracy <input type="text" size="4" value="4" id="nf-input-accuracy" /> digit
 			<br />
 
 			<dl>
 				<dt>Float</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcExp1" id="prcExp1" />
-					<input type="text" size="40" value="" name="prcExp2" id="prcExp2" />
+					<input type="text" size="30" value="" id="nf-output-float1" />
+					<input type="text" size="40" value="" id="nf-output-float2" />
 				</dd>
 				<dt>Apos</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcCamma1" id="prcCamma1" />
-					<input type="text" size="40" value="" name="prcCamma2" id="prcCamma2" />
+					<input type="text" size="30" value="" id="nf-output-apostrophe1" />
+					<input type="text" size="40" value="" id="nf-output-apostrophe2" />
 				</dd>
 				<dt>Short scale</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcSScale1" id="prcSScale1" />
-					<input type="text" size="40" value="" name="prcSScale2" id="prcSScale2" />
+					<input type="text" size="30" value="" id="nf-output-short1" />
+					<input type="text" size="40" value="" id="nf-output-short2" />
 				</dd>
 				<dt>Long scale</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcLScale1" id="prcLScale1" />
-					<input type="text" size="40" value="" name="prcLScale2" id="prcLScale2" />
+					<input type="text" size="30" value="" id="nf-output-long1" />
+					<input type="text" size="40" value="" id="nf-output-long2" />
 				</dd>
 				<dt>漢字表記</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcKan1" id="prcKan1" />
-					<input type="text" size="40" value="" name="prcKan2" id="prcKan2" />
+					<input type="text" size="30" value="" id="nf-output-kanji1" />
+					<input type="text" size="40" value="" id="nf-output-kanji2" />
 				</dd>
 				<dt>金融</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcFinance1" id="prcFinance1" />
-					<input type="text" size="40" value="" name="prcFinance2" id="prcFinance2" />
+					<input type="text" size="30" value="" id="nf-output-financial1" />
+					<input type="text" size="40" value="" id="nf-output-financial2" />
 				</dd>
 			</dl>
 
@@ -285,5 +285,6 @@
 	<script src="./Reloader.js"></script>
 	<script src="./NumberSequenceGenerator.js"></script>
 	<script src="./ScreenResolutionCalculator.js"></script>
+	<script src="./NumberFormatter.js"></script>
 </body>
 </html>
