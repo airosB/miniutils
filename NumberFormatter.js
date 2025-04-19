@@ -32,8 +32,6 @@ const NumberFormatter = {
      */
     formatFloat: (array, digits) => {
         const ar = [...array];
-        const first = ar.shift();
-        ar.unshift('.', first);
 
         // 末尾の0を削除
         while (ar[ar.length - 1] === 0) {
@@ -47,7 +45,7 @@ const NumberFormatter = {
     /**
      * カンマ区切り形式にフォーマット
      */
-    formatComma: (array, digits) => {
+    formatApostrophe: (array, digits) => {
         const ar = [...array];
         ar.push(...Array(digits - ar.length).fill(0));
         ar.reverse();
@@ -178,5 +176,57 @@ const NumberFormatter = {
         });
 
         return result.join('').trim(); // 末尾のスペースを削除
+    },
+
+    /**
+     * HTML要素から値を取得し、フォーマットを実行して結果を出力欄に反映させる
+     */
+    update: () => {
+        const inputNumberEl = document.getElementById('nf-input-number');
+        const inputAccuracyEl = document.getElementById('nf-input-accuracy');
+
+        const rawNumber = inputNumberEl.value.replace(/[^0-9]/g, ''); // 数字以外を除去
+        const accuracy = parseInt(inputAccuracyEl.value, 10) || 0; // 精度を取得、無効な場合は0
+
+        if (!rawNumber) {
+            // 入力が空の場合は出力欄もクリア
+            const outputIds = [
+                'nf-output-float1', 'nf-output-float2', 'nf-output-apostrophe1', 'nf-output-apostrophe2',
+                'nf-output-short1', 'nf-output-short2', 'nf-output-long1', 'nf-output-long2',
+                'nf-output-kanji1', 'nf-output-kanji2', 'nf-output-financial1', 'nf-output-financial2'
+            ];
+            outputIds.forEach(id => document.getElementById(id).value = '');
+            return;
+        }
+
+        const { array, arrayLimited } = NumberFormatter.parseInput(rawNumber, accuracy);
+        const digits = rawNumber.length; // 元の桁数
+
+        _('#nf-output-float1').value = NumberFormatter.formatFloat(arrayLimited, digits);
+        _('#nf-output-float2').value = NumberFormatter.formatFloat(array, digits);
+        _('#nf-output-apostrophe1').value = NumberFormatter.formatApostrophe(arrayLimited, digits);
+        _('#nf-output-apostrophe2').value = NumberFormatter.formatApostrophe(array, digits);
+        _('#nf-output-short1').value = NumberFormatter.formatShortScale(arrayLimited, digits);
+        _('#nf-output-short2').value = NumberFormatter.formatShortScale(array, digits);
+        _('#nf-output-long1').value = NumberFormatter.formatLongScale(arrayLimited, digits);
+        _('#nf-output-long2').value = NumberFormatter.formatLongScale(array, digits);
+        _('#nf-output-kanji1').value = NumberFormatter.formatJapanese(arrayLimited, digits);
+        _('#nf-output-kanji2').value = NumberFormatter.formatJapanese(array, digits);
+        _('#nf-output-financial1').value = NumberFormatter.formatFinance(arrayLimited, digits);
+        _('#nf-output-financial2').value = NumberFormatter.formatFinance(array, digits);
+    },
+
+    /**
+     * イベントリスナーをHTML要素にバインドする
+     */
+    bindEvents: () => {
+        const inputNumberEl = document.getElementById('nf-input-number');
+        const inputAccuracyEl = document.getElementById('nf-input-accuracy');
+
+        inputNumberEl.addEventListener('keyup', NumberFormatter.update);
+        inputAccuracyEl.addEventListener('keyup', NumberFormatter.update);
     }
 };
+
+// イベントリスナーを登録
+NumberFormatter.bindEvents();
