@@ -1,6 +1,4 @@
-const _ = (selector) => {
-    return document.querySelector(selector);
-};
+
 
 const reloader = {
     timeToGo: 0,
@@ -125,10 +123,6 @@ const reloader = {
         _('#f15-interval-min').addEventListener('keyup', reloader.min2ms);
         _('#f15-interval-ms').addEventListener('keyup', reloader.ms2min);
     },
-
-    init: () => {
-        reloader.bindEvents();
-    }
 };
 
-reloader.init();
+reloader.bindEvents();
