@@ -31,6 +31,7 @@ const NumberFormatter = {
      * 浮動小数点形式にフォーマット
      */
     formatFloat: (array, digits) => {
+        array.splice(1, 0, '.')
         const ar = [...array];
 
         // 末尾の0を削除
@@ -201,6 +202,7 @@ const NumberFormatter = {
 
         const { array, arrayLimited } = NumberFormatter.parseInput(rawNumber, accuracy);
         const digits = rawNumber.length; // 元の桁数
+        console.log(arrayLimited);
 
         _('#nf-output-float1').value = NumberFormatter.formatFloat(arrayLimited, digits);
         _('#nf-output-float2').value = NumberFormatter.formatFloat(array, digits);
