@@ -64,9 +64,13 @@ const main = () => {
                 if (dominantOrientation !== null) {
                     $img.removeAttr(dominantOrientation === 'width' ? 'height' : 'width');
                     $img.attr(dominantOrientation, imageSizeToEnlarge);
-                    const newSizeIndicator = dominantOrientation === 'width' ? '=w' : '=h';
-                    const enlargedSrc = src.replace(/=w.+$/, `${newSizeIndicator}${imageSizeToEnlarge}`)
-                    console.log(enlargedSrc.substring(230))
+                    const sizeIndicator = dominantOrientation === 'width' ? '=w' : '=h';
+                    const sizeIndicatorNew = dominantOrientation === 'width' ? 'w' : 'h';
+                    const enlargedSrc = src
+                        // 以前の仕様
+                        .replace(/=w.+$/, `${sizeIndicator}${imageSizeToEnlarge}`)
+                        // 2025-07以降の仕様
+                        .replace(/\/w[0-9]+-h[0-9]+\//, `/${sizeIndicatorNew}${imageSizeToEnlarge}/`)
 
                     $img.attr('src', enlargedSrc);
                 }
