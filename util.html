@@ -30,7 +30,45 @@
 		</div>
 	</div>
 
-	<div class="base64 section">
+
+
+    <div class="incremental section">
+        <h2>Incremental Transformation</h2>
+        <div class="content-block">
+            <dl class="incremental-inout">
+                <dl>
+                    <dt><label for="incremental-input">Input:</label></dt>
+                    <dd>
+                        <input type="text" id="incremental-input"
+                               placeholder="Enter number or notation (e.g., 1000 or k)" size="30"/>
+                    </dd>
+                    <dt><label for="incremental-output">Output:</label></dt>
+                    <dd>
+                        <input type="text" id="incremental-output" placeholder="Converted result" size="30" readonly/>
+                    </dd>
+                    <dt><strong>Base notation mode:</strong></dt>
+                    <dd>
+                        <label><input type="radio" name="kmgt-mode" value="none"/> 1</label>
+                        <label><input type="radio" name="kmgt-mode" value="K"/> K</label>
+                        <label><input type="radio" name="kmgt-mode" value="M"/> M</label>
+                        <label><input type="radio" name="kmgt-mode" value="G"/> G</label>
+                        <label><input type="radio" name="kmgt-mode" value="T" checked/> T</label>
+                        <label><input type="radio" name="kmgt-mode" value="P"/> P</label>
+                        <label><input type="radio" name="kmgt-mode" value="E"/> E</label>
+                        <label><input type="radio" name="kmgt-mode" value="Z"/> Z</label>
+                        <label><input type="radio" name="kmgt-mode" value="Y"/> Y</label>
+                        <label><input type="radio" name="kmgt-mode" value="R"/> R</label>
+                        <label><input type="radio" name="kmgt-mode" value="Q"/> Q</label>
+                    </dd>
+                </dl>
+                <p style="margin-top: 25px;">
+                    <button id="incremental-clear-btn">Clear</button>
+                </p>
+        </div>
+    </div>
+
+
+    <div class="base64 section">
 		<h2>Base64 En-Dec</h2>
 		<div class="content-block">
             <p>マルチバイト文字はエンコード時にUTF-8バイト列として解釈される</p>
@@ -234,7 +272,6 @@
 	</div>
 
 
-
 	<div class="roman section">
 		<h2>Roman to Kana Translation</h2>
 		<div class="content-block">
@@ -285,5 +322,6 @@
 	<script src="./NumberSequenceGenerator.js"></script>
 	<script src="./ScreenResolutionCalculator.js"></script>
 	<script src="./NumberFormatter.js"></script>
+	<script src="./IncrementalTransformer.js"></script>
 </body>
 </html>

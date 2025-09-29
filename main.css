@@ -36,7 +36,7 @@ ul{
 	padding-left: 0;
 }
 dl dt{
-	margin-top: 10px;
+	margin-top: 15px;
 }
 dl input{
 	margin-right: 15px;
@@ -82,9 +82,14 @@ button:active, input[type=button]:active, input[type=submit]:active, input[type=
 input[type="checkbox"], input[type="radio"]{
 	position: relative;
 	left: -9999px;
-	top: -3px;
+	top: 1px;
 	margin: 8px 12px 8px 0;
 }
+
+div.transposer input[type="radio"] {
+	top: -3px;
+}
+
 input[type="checkbox"],input[type="radio"],label{
 	font-size: 16px;
 	cursor: pointer;
@@ -239,6 +244,27 @@ ul.f5attack-params>li+li{
 div.kemono-inout textarea {
 	display: inline-block;
 	margin-top: 0;
+}
+
+/* Incremental Transformation styling */
+
+
+.incremental .incremental-inout label {
+	margin-bottom: 5px;
+	font-weight: bold;
+}
+
+.incremental .incremental-inout input[type="text"] {
+	width: 100%;
+	max-width: 400px;
+}
+
+.incremental input[type="radio"] {
+	margin-right: 7px;
+}
+
+.incremental label:has(input[type="radio"]) {
+	margin-right: 15px;
 }
 
 
