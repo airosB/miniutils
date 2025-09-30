@@ -25,12 +25,50 @@
 			</div>
 			<p>
 				<input id="kemono-prefix" type="text" placeholder="prefix" size="5" />
-				<button id="kemono-styling-button">update</button>
+				<button id="kemono-styling-button">extract</button>
 			</p>
 		</div>
 	</div>
 
-	<div class="base64 section">
+
+
+    <div class="incremental section">
+        <h2>Incremental Transformation</h2>
+        <div class="content-block">
+            <dl class="incremental-inout">
+                <dl>
+                    <dt><label for="incremental-input">Input:</label></dt>
+                    <dd>
+                        <input type="text" id="incremental-input"
+                               placeholder="Enter number or notation (e.g., 1000 or k)" size="30"/>
+                    </dd>
+                    <dt><label for="incremental-output">Output:</label></dt>
+                    <dd>
+                        <input type="text" id="incremental-output" placeholder="Converted result" size="30" readonly/>
+                    </dd>
+                    <dt><strong>Base notation mode:</strong></dt>
+                    <dd>
+                        <label><input type="radio" name="kmgt-mode" value="none"/>1</label>
+                        <label><input type="radio" name="kmgt-mode" value="K"/>Kilo</label>
+                        <label><input type="radio" name="kmgt-mode" value="M"/>Mega</label>
+                        <label><input type="radio" name="kmgt-mode" value="G"/>Giga</label>
+                        <label><input type="radio" name="kmgt-mode" value="T" checked/>Tera</label>
+                        <label><input type="radio" name="kmgt-mode" value="P"/>Peta</label>
+                        <label><input type="radio" name="kmgt-mode" value="E"/>Exa</label>
+                        <label><input type="radio" name="kmgt-mode" value="Z"/>Zetta</label>
+                        <label><input type="radio" name="kmgt-mode" value="Y"/>Yotta</label>
+                        <label><input type="radio" name="kmgt-mode" value="R"/>Ronna</label>
+                        <label><input type="radio" name="kmgt-mode" value="Q"/>Quetta</label>
+                    </dd>
+                </dl>
+                <p style="margin-top: 25px;">
+                    <button id="incremental-clear-btn">Clear</button>
+                </p>
+        </div>
+    </div>
+
+
+    <div class="base64 section">
 		<h2>Base64 En-Dec</h2>
 		<div class="content-block">
             <p>マルチバイト文字はエンコード時にUTF-8バイト列として解釈される</p>
@@ -42,33 +80,18 @@
 	<div class="f5attack-result section hidden">
 		<h2>Rapid Reloader Result</h2>
 		<div class="content-block">
-			<iframe id="target-window" name="target-window" src="" width="98%" height="300px" style="background:#ffffff; display:none;">
+			<iframe id="target-window" name="target-window" src="" width="98%" height="300px" style="background:#202020;">
 				Iframe support required.
 			</iframe>
 		</div>
 	</div>
 
 
-	<div class="f5attack section">
+	<div class="reloader section">
 		<h2>Rapid Reloader</h2>
 		<div class="content-block">
 			<input type="text" class="f15-key-change" size="55" id="inputUrl" placeholder="Entry point URL" />
 			<ul class="f5attack-params">
-				<li>
-					<input type="checkbox" class="f15-click-change" id="f15-param1" />
-					<input type="text" class="f15-key-change" size="4" id="f15-name1" value="sid" /> =
-					<input type="text" class="f15-key-change" size="40" id="f15-value1" placeholder="d41d8cd98f00b204e9800998ecf8427e" />
-				</li>
-				<li>
-					<input type="checkbox" class="f15-click-change" id="f15-param2" />
-					<input type="text" class="f15-key-change" size="4" id="f15-name2" value="q" /> =
-					<input type="text" class="f15-key-change" size="40" id="f15-value2" placeholder="myQueue" />
-				</li>
-				<li>
-					<input type="checkbox" class="f15-click-change" id="f15-param3" />
-					<input type="text" class="f15-key-change" size="4" id="f15-name3" value="page" /> =
-					<input type="text" class="f15-key-change" size="40" id="f15-value3" placeholder="5" />
-				</li>
 				<li>
 					<input type="checkbox" class="f15-click-change" id="f15-paramR" />
 					<input type="text" class="f15-key-change" size="4" id="f15-nameR" value="r" /> =
@@ -141,19 +164,19 @@
 	<div class="sequentiol section">
 		<h2>Sequential Numbers Generator</h2>
 		<div class="content-block">
-			<input onclick="imgSrc();" id="series_wrap" class="series-wrap-button" type="button" value="wrap with: img src=&quot; &quot;"/ >
-			<input type="text" size="60" name="series_in" id="series_in" value="http://www.hoge.huga/001.jpg" style="max-width: 88%;" onclick="series();" onkeyup="series();" />
+			<input id="series_wrap" class="series-wrap-button" type="button" value="wrap with: img src=&quot; &quot;" />
+			<input type="text" size="60" name="series_in" id="series_in" value="http://www.hoge.huga/001.jpg" style="max-width: 88%;" />
 			<br />
 			<br />
-			Replace <input type="text" size="3" value="!" name="series_replace" id="series_replace"  disabled="disabled" onkeyup="series();" />
-			with numbers from <input type="text" size="4" value="1" name="series_from" id="series_from" onkeyup="series();" />
-			to <input type="text" size="4" value="20" name="series_to" id="series_to" onkeyup="series();" />
-			with interval <input type="text" size="2" value="1" name="series_interval" id="series_interval" onkeyup="series();" />
-			digit <input type="text" size="2" value="3" name="series_digit" id="series_digit" onkeyup="series();" disabled="disabled" />
+			Replace <input type="text" size="3" value="!" name="series_replace" id="series_replace"  disabled="disabled" />
+			with numbers from <input type="text" size="4" value="1" name="series_from" id="series_from" />
+			to <input type="text" size="4" value="20" name="series_to" id="series_to" />
+			with interval <input type="text" size="2" value="1" name="series_interval" id="series_interval" />
+			digit <input type="text" size="2" value="3" name="series_digit" id="series_digit" disabled="disabled" />
 
 			<br />
-			<input type="checkbox" name="series_auto" id="series_auto" onclick="series();" checked="checked" /><label for="series_auto">auto detection</label>
-			<input type="checkbox" name="series_hex" id="series_hex" style="margin-left: 1em;" onclick="series();" /><label for="series_hex">HEX mode</label>
+			<input type="checkbox" name="series_auto" id="series_auto" checked="checked" /><label for="series_auto">auto detection</label>
+			<input type="checkbox" name="series_hex" id="series_hex" style="margin-left: 1em;" /><label for="series_hex">HEX mode</label>
 
 			<br />
 			<br />
@@ -208,46 +231,45 @@
 	<div class="numformat section">
 		<h2>Large Number Formatter</h2>
 		<div class="content-block">
-			format <input type="text" size="50" value="98765432109876543210" name="inNum" id="inNum" onkeyup="numFuri()" />
-			with accuracy <input type="text" size="4" value="4" name="roundExp" id="roundExp" onkeyup="numFuri()" /> digit
+			format <input type="text" size="50" value="98765432109876543210" id="nf-input-number" />
+			with accuracy <input type="text" size="4" value="4" id="nf-input-accuracy" /> digit
 			<br />
 
 			<dl>
 				<dt>Float</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcExp1" id="prcExp1" />
-					<input type="text" size="40" value="" name="prcExp2" id="prcExp2" />
+					<input type="text" size="30" value="" id="nf-output-float1" />
+					<input type="text" size="40" value="" id="nf-output-float2" />
 				</dd>
 				<dt>Apos</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcCamma1" id="prcCamma1" />
-					<input type="text" size="40" value="" name="prcCamma2" id="prcCamma2" />
+					<input type="text" size="30" value="" id="nf-output-apostrophe1" />
+					<input type="text" size="40" value="" id="nf-output-apostrophe2" />
 				</dd>
 				<dt>Short scale</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcSScale1" id="prcSScale1" />
-					<input type="text" size="40" value="" name="prcSScale2" id="prcSScale2" />
+					<input type="text" size="30" value="" id="nf-output-short1" />
+					<input type="text" size="40" value="" id="nf-output-short2" />
 				</dd>
 				<dt>Long scale</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcLScale1" id="prcLScale1" />
-					<input type="text" size="40" value="" name="prcLScale2" id="prcLScale2" />
+					<input type="text" size="30" value="" id="nf-output-long1" />
+					<input type="text" size="40" value="" id="nf-output-long2" />
 				</dd>
 				<dt>漢字表記</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcKan1" id="prcKan1" />
-					<input type="text" size="40" value="" name="prcKan2" id="prcKan2" />
+					<input type="text" size="30" value="" id="nf-output-kanji1" />
+					<input type="text" size="40" value="" id="nf-output-kanji2" />
 				</dd>
 				<dt>金融</dt>
 				<dd>
-					<input type="text" size="30" value="" name="prcFinance1" id="prcFinance1" />
-					<input type="text" size="40" value="" name="prcFinance2" id="prcFinance2" />
+					<input type="text" size="30" value="" id="nf-output-financial1" />
+					<input type="text" size="40" value="" id="nf-output-financial2" />
 				</dd>
 			</dl>
 
 		</div>
 	</div>
-
 
 
 	<div class="roman section">
@@ -292,10 +314,14 @@
 
 	<script src="./lib/jastyle.js"></script>
 	<script src="./lib/jquery-3.7.1.min.js"></script>
-	<script src="./main.js"></script>
 	<script src="./refactored.js"></script>
-	<script src="EasyTimer.js"></script>
-	<script src="RomanToKanaTranslator.js"></script>
-	<script src="Transposer.js"></script>
+	<script src="./EasyTimer.js"></script>
+	<script src="./RomanToKanaTranslator.js"></script>
+	<script src="./Transposer.js"></script>
+	<script src="./Reloader.js"></script>
+	<script src="./NumberSequenceGenerator.js"></script>
+	<script src="./ScreenResolutionCalculator.js"></script>
+	<script src="./NumberFormatter.js"></script>
+	<script src="./IncrementalTransformer.js"></script>
 </body>
 </html>
