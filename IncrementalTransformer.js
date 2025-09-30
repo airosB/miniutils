@@ -45,7 +45,7 @@ class IncrementalTransformer {
                 return radio.value;
             }
         }
-        return 'M'; // Default
+        return 'T'; // Default
     }
 
     // Get starting exponent for lowercase letters based on mode
@@ -210,8 +210,9 @@ class IncrementalTransformer {
             if (num >= notation.value) {
                 const coefficient = num / notation.value;
                 if (coefficient < 1000) {
-                    // Special case: if coefficient is exactly 1, return scientific notation
-                    if (coefficient === 1) {
+                    // Check current mode - if mode is not "1", use KMGT notation even for coefficient of 1
+                    const currentMode = this.getCurrentMode();
+                    if (coefficient === 1 && currentMode === "1") {
                         const exponent = Math.log10(notation.value);
                         return this.formatScientificNotation(`1e${exponent}`);
                     }

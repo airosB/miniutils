@@ -260,7 +260,7 @@ div.kemono-inout textarea {
 }
 
 .incremental input[type="radio"] {
-	margin-right: 7px;
+	margin-right: 1.5ex;
 }
 
 .incremental label:has(input[type="radio"]) {
