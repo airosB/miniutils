@@ -49,31 +49,49 @@ const main = () => {
         },
 
         enlargeImage: ($article) => {
-            const imageSizeToEnlarge = bloggerStyling.imageSizeToEnlarge;
             $article.find('img').each((_, img) => {
                 const $img = $(img);
                 const src = $img.attr('src');
 
-                // 初回実行時は640、再実行時は720で渡される
-                const dominantOrientation = ($img.attr('width') === '640' || $img.attr('width') === '720')
-                    ? 'width'
-                    : ($img.attr('height') === '640' || $img.attr('height') === '720')
-                        ? 'height'
+                // 幅優先でサイズ指定されているか
+                const hasWidthDominance
+                    // Bloggerの作るデフォルト画像サイズは640だが、修正しながらEnlargeを何度も通すこともあるため、720で渡されても大丈夫しておく
+                    // 横長画像のサイズがheightで指定されるケースがあるので、縦480は横長として判定する
+                    = $img.attr('width') === '640' || $img.attr('width') === '720' || $img.attr('height') === '480'
+                    ? true
+                    : $img.attr('height') === '640' || $img.attr('height') === '720'
+                        ? false
                         : null;
 
-                if (dominantOrientation !== null) {
-                    $img.removeAttr(dominantOrientation === 'width' ? 'height' : 'width');
-                    $img.attr(dominantOrientation, imageSizeToEnlarge);
-                    const sizeIndicator = dominantOrientation === 'width' ? '=w' : '=h';
-                    const sizeIndicatorNew = dominantOrientation === 'width' ? 'w' : 'h';
-                    const enlargedSrc = src
-                        // 以前の仕様
-                        .replace(/=w.+$/, `${sizeIndicator}${imageSizeToEnlarge}`)
-                        // 2025-07以降の仕様
-                        .replace(/\/w[0-9]+-h[0-9]+\//, `/${sizeIndicatorNew}${imageSizeToEnlarge}/`)
-
-                    $img.attr('src', enlargedSrc);
+                // 決定できなければ何もせず次のimgへ
+                if (hasWidthDominance === null) {
+                    return true;
                 }
+
+                // 操作対象を決める
+                let attrToSet, attrToRemove, sizeIndicatorPrev, sizeIndicatorNew;
+                if (hasWidthDominance) {
+                    attrToSet = 'width';
+                    attrToRemove = 'height';
+                    sizeIndicatorPrev = '=w';
+                    sizeIndicatorNew = 'w';
+                } else {
+                    attrToSet = 'height';
+                    attrToRemove = 'width';
+                    sizeIndicatorPrev = '=h';
+                    sizeIndicatorNew = 'h';
+                }
+
+                // 新しいサイズ指定句を作る
+                const enlargedSrc = src
+                    // 以前の仕様
+                    .replace(/=w.+$/, `${sizeIndicatorPrev}${bloggerStyling.imageSizeToEnlarge}`)
+                    // 2025-07以降の仕様
+                    .replace(/\/w[0-9]+-h[0-9]+\//, `/${sizeIndicatorNew}${bloggerStyling.imageSizeToEnlarge}/`)
+
+                $img.removeAttr(attrToRemove);
+                $img.attr(attrToSet, bloggerStyling.imageSizeToEnlarge);
+                $img.attr('src', enlargedSrc);
             });
             return $article;
         },
