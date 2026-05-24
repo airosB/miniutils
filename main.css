@@ -246,6 +246,11 @@ div.kemono-inout textarea {
 	margin-top: 0;
 }
 
+div.tree-inout textarea {
+	display: inline-block;
+	margin-top: 0;
+}
+
 /* Incremental Transformation styling */
 
 
