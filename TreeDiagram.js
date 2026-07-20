@@ -1,4 +1,25 @@
 (() => {
+
+    /**
+     * 最初の1回のみSplitして、それ以降はぜんぶ元の文字列にして返す関数
+     * @param text
+     * @param separator
+     * @returns {[*,*]|[undefined]}
+     */
+    const splitOnlyOnetime = (text, separator) => {
+        const index = text.indexOf(separator);
+
+        if (index !== -1) {
+            return [
+                text.slice(0, index),
+                text.slice(index + separator.length)
+            ];
+        } else {
+            // 区切り文字が見つからない場合
+            return [text];
+        }
+    }
+
     /**
      * データの構造化
      * @param text
@@ -15,7 +36,7 @@
         for (const line of lines) {
             if (!line.trim()) continue;
 
-            const [levelStr, name] = line.split(",");
+            const [levelStr, name] = splitOnlyOnetime(line, ',');
             const level = parseInt(levelStr, 10);
 
             // 新しいノードのオブジェクトを作成
